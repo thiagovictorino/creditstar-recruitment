@@ -16,15 +16,15 @@ class PersonalCodeFactory
      */
     public static function make($code): PersonalCodeDTO{
         
-        $splitted = $this->splitCode($code);
+        $splitted = self::splitCode($code);
 
         $dto = new PersonalCodeDTO();
-        $dto->gender = $this->getGender($splitted[0]);
-        $dto->century = $this->getCentury($splitted[0]);
-        $dto->birthday = $this->getBirthday($splitted[1], $splitted[2], $splitted[3]);
-        $dto->age = $this->getAge($dto->birthday);
-        $dto->hash = $this->getHash($splitted[4]);
-        $dto->checksum = $this->getChecksum($splitted[4]);
+        $dto->gender = self::getGender($splitted[0]);
+        $dto->century = self::getCentury($splitted[0]);
+        $dto->birthday = self::getBirthday($splitted[1], $splitted[2], $splitted[3]);
+        $dto->age = self::getAge($dto->birthday);
+        $dto->hash = self::getHash($splitted[4]);
+        $dto->checksum = self::getChecksum($splitted[5]);
         
         return $dto;
     }
@@ -85,15 +85,15 @@ class PersonalCodeFactory
      * @throws PersonalCodeException If the value is not expected
      */
     protected function getCentury($gender): int{ 
-        if($gender === 1 || $gender === 2){
+        if($gender == 1 || $gender == 2){
             return 19;
         }
 
-        if ($gender === 3 || $gender === 4) {
+        if ($gender == 3 || $gender == 4) {
             return 20;
         }
 
-        if ($gender === 5 || $gender === 6) {
+        if ($gender == 5 || $gender == 6) {
             return 21;
         }
 
