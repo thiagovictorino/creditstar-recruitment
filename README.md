@@ -10,6 +10,10 @@ Once the test is completed please forward the results to <it.career@creditstar.c
 
 Install Docker https://www.docker.com/get-started
 
+Build the container (sometimes you could have this image already, but its necessary to update some features added to this project)
+
+    docker-compose build
+
 Update your vendor packages
 
     docker-compose run --rm php composer update --prefer-dist
@@ -56,11 +60,11 @@ You need to create a webapp that provides:
     * https://www.yiiframework.com/doc/guide/2.0/en/output-data-providers
     * https://www.yiiframework.com/doc/guide/2.0/en/output-data-widgets
 
-3.  There are two JSON files in the root folder of the project ( ```users.json``` and ```loans.json``` ) with predefined loans and users. 
+3.  ✅ There are two JSON files in the root folder of the project ( ```users.json``` and ```loans.json``` ) with predefined loans and users. 
 
     You must import that data into the database programmatically. For example, create a [console script](https://www.yiiframework.com/doc/guide/2.0/en/tutorial-console) that imports the file or use a [migration](https://www.yiiframework.com/doc/guide/2.0/en/db-migrations)
 
-4.  Write a method to get user age from user personal code. 
+4.  ✅ Write a method to get user age from user personal code. 
     
     All supplied personal codes are in [Estonian personal code format](https://en.wikipedia.org/wiki/National_identification_number#Estonia).
     Display user age in user view.
@@ -69,7 +73,7 @@ You need to create a webapp that provides:
 
     Use Bootstrap available functionalities as much as you can. Bonus for responsiveness ( rather mandatory ) and SCSS usage. [Ubuntu font](http://font.ubuntu.com) should be used.
 
-6.  Write a test case to test if your user age calculation method returns correct age and test if user is allowed to apply for a loan (user is not underage).
+6.  ✅ Write a test case to test if your user age calculation method returns correct age and test if user is allowed to apply for a loan (user is not underage).
 
     Run this command to execute tests:
 
@@ -87,8 +91,8 @@ You need to create a webapp that provides:
     *  http://www.yiiframework.com/doc-2.0/ext-gii-index.html
     *  http://www.yiiframework.com/doc-2.0/guide-structure-overview.html
    
-*  Code legibility
-*  Git usage. How commits are created and commented. We want to see the process of the work
+*  ✅ Code legibility
+*  ✅ Git usage. How commits are created and commented. We want to see the process of the work
 *  Finished code should be possible to deploy and run the same way as described in Setup section
 
 Should any technical questions arise feel free to contact: <it.career@creditstar.com>
