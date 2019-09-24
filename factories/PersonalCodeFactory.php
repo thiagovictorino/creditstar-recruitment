@@ -141,6 +141,11 @@ class PersonalCodeFactory
         return $checksum;
     }
 
+    /**
+     * Checks if the age is allowed to get a loan
+     * @param $age int The age provided by Personal Code
+     * @return bool - True if allowed, False if isn't
+     */
     protected function getIsAllowed($age){
         return $age >= 18;
     }
