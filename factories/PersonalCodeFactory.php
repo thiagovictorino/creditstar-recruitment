@@ -14,17 +14,18 @@ class PersonalCodeFactory
      * @param $code String Personal Code 
      * @return PersonalCodeDTO 
      */
-    public static function make($code): PersonalCodeDTO{
+    public static function make(string $code): PersonalCodeDTO{
         
         $splitted = self::splitCode($code);
 
         $dto = new PersonalCodeDTO();
         $dto->gender = self::getGender($splitted[0]);
         $dto->century = self::getCentury($splitted[0]);
-        $dto->birthday = self::getBirthday($splitted[1], $splitted[2], $splitted[3]);
+        $dto->birthday = self::getBirthday($splitted[1], $splitted[2], $splitted[3], $dto->century);
         $dto->age = self::getAge($dto->birthday);
         $dto->hash = self::getHash($splitted[4]);
         $dto->checksum = self::getChecksum($splitted[5]);
+        $dto->is_allowed = self::getIsAllowed($dto->age);
         
         return $dto;
     }
@@ -32,9 +33,9 @@ class PersonalCodeFactory
     /**
      * Get the personal code, validate and split into array
      * @return array
-     * @param String Personal Code
+     * @param string Personal Code
      */
-    protected function splitCode($code): array{
+    protected function splitCode(string $code): array{
         $code = (string) $code;
 
         if(strlen($code) !== 11){
@@ -57,12 +58,24 @@ class PersonalCodeFactory
      * @param $day int Day provided personal code
      * @return DateTime
      */
-    protected function getBirthday($year, $month, $day): DateTime{
+    protected function getBirthday($year, $month, $day, $century): DateTime{
         try{
-            return new DateTime($year . '-' . $month . '-' . $day);
+            $fullYear = self::getFullYear($century, $year);
+            return new DateTime($fullYear . '-' . $month . '-' . $day);
         }catch(\Exception $e){
             throw new PersonalCodeException($e->getMessage(), $e->code, $e);
         }
+    }
+
+    /**
+     * Return full year according the century provided by Personal Code
+     * @param $century int Century provided by Personal code
+     * @param $year int Year provided by Personal code
+     * @return string
+     */
+    protected function getFullYear($century, $year){
+        $centuryMilenial = $century - 1;
+        return $centuryMilenial.$year;
     }
 
     /**
@@ -126,5 +139,9 @@ class PersonalCodeFactory
      */
     protected function getChecksum($checksum): string{ 
         return $checksum;
+    }
+
+    protected function getIsAllowed($age){
+        return $age >= 18;
     }
 }

@@ -19,16 +19,17 @@ class PersonalFactoryTest extends \Codeception\Test\Unit {
          * the age on hard code
          */
         $now = new DateTime(date("Y-m-d"));
-        $birthday = new DateTime(date("1986-11-23"));
+        $birthday = new DateTime(date("1886-11-23"));
         $age =  (int) $birthday->diff($now)->format('%y');
         
 
         expect($personal->gender)->equals(PersonalCodeGenderEnum::MALE);
         expect($personal->age)->equals($age);
         expect($personal->hash)->equals(666);
+        expect($personal->is_allowed)->equals(true);
         expect($personal->century)->equals(19);
         expect($personal->checksum)->equals(9);
-        expect($personal->birthday->format('Y'))->equals(1986);
+        expect($personal->birthday->format('Y'))->equals(1886);
         expect($personal->birthday->format('m'))->equals(11);
         expect($personal->birthday->format('d'))->equals(23);
     }
@@ -58,11 +59,20 @@ class PersonalFactoryTest extends \Codeception\Test\Unit {
         $code = '38611236669';
         $personal = PersonalCodeFactory::make($code);
         expect($personal->century)->equals(20);
+        expect($personal->birthday->format('Y'))->equals(1986);
     }
 
     public function testValidCentury21PersonalCode(){
         $code = '58611236669';
         $personal = PersonalCodeFactory::make($code);
         expect($personal->century)->equals(21);
+        expect($personal->birthday->format('Y'))->equals(2086);
+    }
+
+    public function testValidUnderagePersonalCode()
+    {
+        $code = '50511236669';
+        $personal = PersonalCodeFactory::make($code);
+        expect($personal->is_allowed)->equals(false);
     }
 }

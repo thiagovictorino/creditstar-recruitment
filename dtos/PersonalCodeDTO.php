@@ -8,4 +8,5 @@ class PersonalCodeDTO {
     public $hash;
     public $checksum;
     public $century;
+    public $is_allowed;
 }
