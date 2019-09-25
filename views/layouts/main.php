@@ -77,7 +77,7 @@ AppAsset::register($this);
                 <div class="container">
                     <ul class="list-inline">
                         <li><a href="#">Loans</a></li>
-                        <li><a href="#">Users</a></li>
+                        <li><a href="<?=Yii::$app->url->toRoute('/user')?>">Users</a></li>
                     </ul>
                 </div>
             </div>
@@ -93,14 +93,9 @@ AppAsset::register($this);
                     <div class="padding-large">
                         <p class="text-lead"><?= $this->title ?></p>
                     </div>
-                    <div class="padding-left-large padding-right-large">
+                    <div class="padding-left-large font-400 padding-right-large">
                         <?= $content ?>
                     </div>
-                </div>
-                <div class="margin-top-small">
-                    <button class="btn btn-warning button button-warning">VAATAN SALDOSEIS</button>
-                    <button class="btn btn-warning button button-danger margin-left-small">MAKSAN VOLGNESVUSE</button>
-                    <button class="btn btn-warning button button-danger margin-left-small">MAKSAN KOGU LAENU UHE MAKSEGA</button>
                 </div>
             </div>
         </section>

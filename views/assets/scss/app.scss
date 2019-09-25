@@ -162,3 +162,35 @@
 .w-full {
     min-width: 100%;
 }
+.overflow-x-auto{
+  overflow-x: auto;
+}
+
+.font-400 {
+  font-weight: 400;
+}
+
+.app-table {
+
+  thead tr th a{
+    font-weight: 400;
+  }
+  tbody tr td {
+    color: #4a5568;
+  }
+  a {
+    color: #2d3748;
+  }
+
+}
+
+.app-page {
+  a {
+      color: #2d3748 !important;
+    }
+}
+.active a{
+    color: white !important;
+    background-color: #777 !important;
+    border-color: #777 !important;
+  }

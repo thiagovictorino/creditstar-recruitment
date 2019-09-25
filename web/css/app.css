@@ -322,3 +322,33 @@
 /* line 162, views/assets/scss/app.scss */
 .w-full {
   min-width: 100%; }
+
+/* line 165, views/assets/scss/app.scss */
+.overflow-x-auto {
+  overflow-x: auto; }
+
+/* line 169, views/assets/scss/app.scss */
+.font-400 {
+  font-weight: 400; }
+
+/* line 175, views/assets/scss/app.scss */
+.app-table thead tr th a {
+  font-weight: 400; }
+
+/* line 178, views/assets/scss/app.scss */
+.app-table tbody tr td {
+  color: #4a5568; }
+
+/* line 181, views/assets/scss/app.scss */
+.app-table a {
+  color: #2d3748; }
+
+/* line 188, views/assets/scss/app.scss */
+.app-page a {
+  color: #2d3748 !important; }
+
+/* line 192, views/assets/scss/app.scss */
+.active a {
+  color: white !important;
+  background-color: #777 !important;
+  border-color: #777 !important; }
