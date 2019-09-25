@@ -1,0 +1,62 @@
+$default-gap: 10px;
+$small-gap: 5px;
+$medium-gap: 20px;
+$large-gap: 30px;
+
+$sides: top, left, right, bottom;
+
+@mixin padding-default {
+  .padding { padding: $default-gap };
+  @each $side in $sides {
+    .padding-#{$side}{ padding-#{$side}: $default-gap};
+  }
+}
+
+@mixin padding-small {
+  .padding-small { padding: $small-gap };
+  @each $side in $sides {
+    .padding-#{$side}-small { padding-#{$side}: $small-gap};
+  }
+}
+
+@mixin padding-medium {
+  .padding-medium { padding: $medium-gap };
+  @each $side in $sides {
+    .padding-#{$side}-medium { padding-#{$side}: $medium-gap};
+  }
+}
+
+@mixin padding-large {
+  .padding-large { padding: $large-gap };
+  @each $side in $sides {
+    .padding-#{$side}-large { padding-#{$side}: $large-gap};
+  }
+}
+
+@mixin margin-default {
+  .margin { margin: $default-gap };
+  @each $side in $sides {
+    .margin-#{$side}{ margin-#{$side}: $default-gap};
+  }
+}
+
+@mixin margin-small {
+  .margin-small { margin: $small-gap };
+  @each $side in $sides {
+    .margin-#{$side}-small { margin-#{$side}: $small-gap};
+  }
+}
+
+@mixin margin-medium {
+  .margin-medium { margin: $medium-gap };
+  @each $side in $sides {
+    .margin-#{$side}-medium { margin-#{$side}: $medium-gap};
+  }
+}
+
+@mixin margin-large {
+  .margin-large { margin: $large-gap };
+  @each $side in $sides {
+    .margin-#{$side}-large { margin-#{$side}: $large-gap};
+  }
+}
