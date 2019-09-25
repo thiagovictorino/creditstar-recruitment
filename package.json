@@ -13,7 +13,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-css": "node-sass --include-path scss views/assets/scss/app.scss   web/css/app.css"
+    "build-css": "node-sass --include-path scss views/assets/scss/app.scss   web/css/app.css",
+    "watch-css": "node-sass -watch --include-path scss views/assets/scss/app.scss   web/css/app.css"
   },
   "repository": {
     "type": "git",

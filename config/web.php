@@ -43,6 +43,9 @@ $config = [
             ],
         ],
         'db' => $db,
+        'assetManager' => [
+            'appendTimestamp' => true,
+        ],
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
