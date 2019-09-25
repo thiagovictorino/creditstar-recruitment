@@ -20,30 +20,37 @@ class DbController extends Controller
      * @throws \yii\db\Exception
      */
     public function actionSeed(){
+        echo "\n=== Seeding database ===\n\n";
         $this->seedUsers();
         $this->seedLoans();
+        echo "\nCheers!🍻🍻 \nDatabase has been successfully seeded\n\n";
     }
 
     /**
      * Seed the user table
      */
     protected function seedUsers(){
+        echo "Cleaning user table...\n";
         User::deleteAll();
+        echo "Seeding users... \n";
         $userModel = new User();
         $userData = json_decode(file_get_contents(__DIR__ . '/../users.json'), true);
         Yii::$app->db->createCommand()->batchInsert(User::tableName(), $userModel->attributes(), $userData)->execute();
+        echo "Table user seeded. \n";
     }
 
     /**
      * Seed the loan table
      */
     protected function seedLoans(){
+        echo "Cleaning loan table...\n";
         Loan::deleteAll();
+        echo "Seeding loans... \n";
         $loanModel = new Loan();
         $loanData = json_decode(file_get_contents(__DIR__ . '/../loans.json'), true);
         $loansNormalized = $this->normalizeLoanData($loanData);
         Yii::$app->db->createCommand()->batchInsert(Loan::tableName(), $loanModel->attributes(), $loansNormalized)->execute();
-        echo "Database Seed has been successfully inserted \n";
+        echo "Table loan seeded. \n";
     }
 
     /**
