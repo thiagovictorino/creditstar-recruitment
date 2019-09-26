@@ -8,7 +8,8 @@ require(__DIR__ . '/../vendor/autoload.php');
 require(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
 
 function dd($data){
-    die(print_r($data,true));
+    echo '<pre>';
+    die(print_r($data,true). '</pre>');
 }
 
 $config = require(__DIR__ . '/../config/web.php');

@@ -76,8 +76,8 @@ AppAsset::register($this);
             <div class="bg-gray">
                 <div class="container">
                     <ul class="list-inline">
-                        <li><a href="#">Loans</a></li>
-                        <li><a href="<?=Yii::$app->url->toRoute('/user')?>">Users</a></li>
+                        <li><a href="<?= Yii::$app->url->toRoute('/loan') ?>">Loans</a></li>
+                        <li><a href="<?= Yii::$app->url->toRoute('/user') ?>">Users</a></li>
                     </ul>
                 </div>
             </div>
