@@ -32,8 +32,7 @@ class UserController extends \yii\web\Controller
     public function actionView($id)
     {
         $object = User::find()->where([
-            'id' => $id,
-            'active' => 1
+            'id' => $id
         ])->one();
 
         if (empty($object)) {
@@ -46,6 +45,7 @@ class UserController extends \yii\web\Controller
     public function actionCreate()
     {
         $model = new UserForm();
+        $model->scenario = 'create';
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $userModel = new User();
@@ -55,16 +55,16 @@ class UserController extends \yii\web\Controller
             $userModel->phone = $model->phone;
             $userModel->personal_code = $model->personal_code;
             $userModel->active = 1;
-            $userModel->dead = ($model->dead == 'no') ? 1 : 0;
+            $userModel->dead = 0;
             $userModel->lang = $model->lang;
-            if ($userModel->validate()) {
-                $userModel->save();
-                return $this->redirect(['users/view', 'id' => $userModel->id]);
-            } else
-                die(json_encode($userModel->errors));
-        } else {
-            return $this->render('create', ['model' => $model]);
+            $userModel->save();
+            Yii::$app->session->setFlash('success', "User has been created successfully!");
+            return $this->redirect(['user/view', 'id' => $userModel->id]);
+
         }
+            
+        return $this->render('create', ['model' => $model]);
+        
     }
 
 
@@ -72,8 +72,7 @@ class UserController extends \yii\web\Controller
     {
         $model = new UserForm();
         $userModel = User::find()->where([
-            'id' => $id,
-            'active' => 1
+            'id' => $id
         ])->one();
 
         if (empty($userModel)) {
@@ -86,17 +85,24 @@ class UserController extends \yii\web\Controller
             $userModel->email = $model->email;
             $userModel->phone = $model->phone;
             $userModel->personal_code = $model->personal_code;
-            $userModel->active = 1;
-            $userModel->dead = ($model->dead == 'no') ? 1 : 0;
+            $userModel->active = $model->active;
+            $userModel->dead = $model->dead;
             $userModel->lang = $model->lang;
-            if ($userModel->validate()) {
-                $userModel->save();
-                return $this->redirect(['users/view', 'id' => $userModel->id]);
-            } else
-                die(json_encode($userModel->errors));
-        } else {
-            return $this->render('create', ['user' => $userModel, 'model' => $model]);
-        }
+            $userModel->save();
+            Yii::$app->session->setFlash('success', "User has been updated successfully!");
+            return $this->redirect(['user/view', 'id' => $userModel->id]);
+        } 
+
+        $model->id = $userModel->id;
+        $model->first_name = $userModel->first_name;
+        $model->last_name = $userModel->last_name;
+        $model->email = $userModel->email;
+        $model->phone = $userModel->phone;
+        $model->personal_code = $userModel->personal_code;
+        $model->active = $userModel->active;
+        $model->dead = $userModel->dead;
+        $model->lang = $userModel->lang;
+        return $this->render('update', ['model' => $model]);
     }
 
     /**
@@ -108,15 +114,14 @@ class UserController extends \yii\web\Controller
     public function actionDelete($id)
     {
         $userModel = User::find()->where([
-            'id' => $id,
-            'active' => 1
+            'id' => $id
         ])->one();
 
         if (empty($userModel)) {
             die('User cannot find');
         }
         $userModel->delete();
-        echo "User " . $id . " has been removed successfully";
-        return;
+        Yii::$app->session->setFlash('success', "User has been deleted successfully!");
+        return $this->redirect('/user');
     }
 }

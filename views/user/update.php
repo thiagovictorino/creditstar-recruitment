@@ -1,16 +1,13 @@
 <?php
-
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
 /* @var $form ActiveForm */
-
-$this->title = 'Addind new User';
+$this->title = 'Editing: ' . $model->first_name . ' ' . $model->last_name;
 ?>
-<div class="user-create">
-
+<?= $this->render('_flash') ?>
+<div class="user-update">
     <?= $this->render('_form', [
         'model' => $model,
-        'action' => 'create'
+        'action' => 'update'
     ]) ?>
-
-</div><!-- user-create -->
+</div>

@@ -3,10 +3,11 @@
 use app\enums\PersonalCodeGenderEnum;
 use app\factories\PersonalCodeFactory;
 
-$this->title = $user->first_name.' '. $user->last_name.' details';
+$this->title = 'Details: ' . $user->first_name . ' ' . $user->last_name;
 $personalCode = PersonalCodeFactory::make($user->personal_code)
 ?>
 <div>
+    <?= $this->render('_flash') ?>
     <div class='row'>
         <div class='col-sm-6'>
             <div class="row">
@@ -23,6 +24,14 @@ $personalCode = PersonalCodeFactory::make($user->personal_code)
                 </div>
                 <div class='col-sm-9'>
                     <?= $user->email ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class='col-sm-3'>
+                    Phone:
+                </div>
+                <div class='col-sm-9'>
+                    <?= $user->phone ?>
                 </div>
             </div>
             <div class="row">
@@ -73,9 +82,17 @@ $personalCode = PersonalCodeFactory::make($user->personal_code)
                     <?= $user->dead ? 'Yes' : 'No' ?>
                 </div>
             </div>
+            <div class="row">
+                <div class='col-sm-3'>
+                    Language:
+                </div>
+                <div class='col-sm-9'>
+                    <?= $user->lang ?>
+                </div>
+            </div>
             <div class="row flex margin-top-large">
-                    <button class="btn btn-warning button button-warning">Edit</button>&nbsp;
-                    <button class="btn btn-warning button button-danger margin-left-small">Delete</button>
+                <a href="<?= Yii::$app->url->toRoute('/user/update?id=' . $user->id) ?>"><button class="btn btn-warning button button-warning">Edit</button></a>&nbsp;
+                <a href="<?= Yii::$app->url->toRoute('/user/delete?id=' . $user->id) ?>" title="Delete" aria-label="Delete" data-pjax="0" data-confirm="Are you sure you want to delete this item?" data-method="post"><button class="btn btn-warning button button-danger margin-left-small">Delete</button></a>
             </div>
         </div>
     </div>
