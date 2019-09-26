@@ -1,0 +1,29 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "As a very first shortlisting procedure of candidates, we have set up a test exercise that the interested applicants are executing.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "node-sass": "^4.12.0",
+    "nodemon": "^1.19.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-css": "node-sass --include-path scss views/assets/scss/app.scss   web/css/app.css",
+    "watch-css": "node-sass -watch --include-path scss views/assets/scss/app.scss   web/css/app.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thiagovictorino/creditstar-recruitment.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thiagovictorino/creditstar-recruitment/issues"
+  },
+  "homepage": "https://github.com/thiagovictorino/creditstar-recruitment#readme"
+}

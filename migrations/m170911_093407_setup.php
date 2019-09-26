@@ -34,7 +34,7 @@ class m170911_093407_setup extends Migration
             'start_date' => Schema::TYPE_DATE . ' NOT NULL',
             'end_date' => Schema::TYPE_DATE . ' NOT NULL',
             'campaign' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'status' => Schema::TYPE_BOOLEAN
+            'status' => Schema::TYPE_INTEGER . ' NOT NULL'
         ]);
     }
 
