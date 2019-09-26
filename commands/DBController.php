@@ -36,6 +36,8 @@ class DbController extends Controller
         $userModel = new User();
         $userData = json_decode(file_get_contents(__DIR__ . '/../users.json'), true);
         Yii::$app->db->createCommand()->batchInsert(User::tableName(), $userModel->attributes(), $userData)->execute();
+        echo "Fixing id seq. \n";
+        Yii::$app->db->createCommand("ALTER SEQUENCE user_id_seq RESTART 8000")->execute();
         echo "Table user seeded. \n";
     }
 
@@ -50,6 +52,8 @@ class DbController extends Controller
         $loanData = json_decode(file_get_contents(__DIR__ . '/../loans.json'), true);
         $loansNormalized = $this->normalizeLoanData($loanData);
         Yii::$app->db->createCommand()->batchInsert(Loan::tableName(), $loanModel->attributes(), $loansNormalized)->execute();
+        echo "Fixing id seq. \n";
+        Yii::$app->db->createCommand("ALTER SEQUENCE user_id_seq RESTART 38000")->execute();
         echo "Table loan seeded. \n";
     }
 

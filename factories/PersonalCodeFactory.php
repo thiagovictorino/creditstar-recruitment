@@ -15,17 +15,18 @@ class PersonalCodeFactory
      * @return PersonalCodeDTO 
      */
     public static function make(string $code): PersonalCodeDTO{
-        
-        $splitted = self::splitCode($code);
+        $self = new PersonalCodeFactory();
+
+        $splitted = $self->splitCode($code);
 
         $dto = new PersonalCodeDTO();
-        $dto->gender = self::getGender($splitted[0]);
-        $dto->century = self::getCentury($splitted[0]);
-        $dto->birthday = self::getBirthday($splitted[1], $splitted[2], $splitted[3], $dto->century);
-        $dto->age = self::getAge($dto->birthday);
-        $dto->hash = self::getHash($splitted[4]);
-        $dto->checksum = self::getChecksum($splitted[5]);
-        $dto->is_allowed = self::getIsAllowed($dto->age);
+        $dto->gender = $self->getGender($splitted[0]);
+        $dto->century = $self->getCentury($splitted[0]);
+        $dto->birthday = $self->getBirthday($splitted[1], $splitted[2], $splitted[3], $dto->century);
+        $dto->age = $self->getAge($dto->birthday);
+        $dto->hash = $self->getHash($splitted[4]);
+        $dto->checksum = $self->getChecksum($splitted[5]);
+        $dto->is_allowed = $self->getIsAllowed($dto->age);
         
         return $dto;
     }
@@ -35,7 +36,7 @@ class PersonalCodeFactory
      * @return array
      * @param string Personal Code
      */
-    protected function splitCode(string $code): array{
+    public function splitCode(string $code): array{
         $code = (string) $code;
 
         if(strlen($code) !== 11){
@@ -58,7 +59,7 @@ class PersonalCodeFactory
      * @param $day int Day provided personal code
      * @return DateTime
      */
-    protected function getBirthday($year, $month, $day, $century): DateTime{
+    public function getBirthday($year, $month, $day, $century): DateTime{
         try{
             $fullYear = self::getFullYear($century, $year);
             return new DateTime($fullYear . '-' . $month . '-' . $day);
@@ -73,7 +74,7 @@ class PersonalCodeFactory
      * @param $year int Year provided by Personal code
      * @return string
      */
-    protected function getFullYear($century, $year){
+    public function getFullYear($century, $year){
         $centuryMilenial = $century - 1;
         return $centuryMilenial.$year;
     }
@@ -82,7 +83,7 @@ class PersonalCodeFactory
      * Get the gender number data and return the write Gender 
      * @param $gender String Gender number provided by Personal Code
      */
-    protected function getGender($gender): int{
+    public function getGender($gender): int{
          $rest = $gender % 2;
          if($rest === 0){
              return PersonalCodeGenderEnum::FEMALE;
@@ -97,7 +98,7 @@ class PersonalCodeFactory
      * @return int
      * @throws PersonalCodeException If the value is not expected
      */
-    protected function getCentury($gender): int{ 
+    public function getCentury($gender): int{ 
         if($gender == 1 || $gender == 2){
             return 19;
         }
@@ -119,7 +120,7 @@ class PersonalCodeFactory
      * @param $birthday DateTime The birthday provided by Personal Code
      * @return int The age in years
      */
-    protected function getAge(DateTime $birthday): int{
+    public function getAge(DateTime $birthday): int{
         $now = new DateTime(date("Y-m-d"));
         return (int) $birthday->diff($now)->format('%y');
     }
@@ -129,7 +130,7 @@ class PersonalCodeFactory
      * @param $hash
      * @param String The hash informed
      */
-    protected function getHash($hash): string{ 
+    public function getHash($hash): string{ 
         return $hash;
     }
     /**
@@ -137,7 +138,7 @@ class PersonalCodeFactory
      * @param $chacksum String
      * @return String The hash informed
      */
-    protected function getChecksum($checksum): string{ 
+    public function getChecksum($checksum): string{ 
         return $checksum;
     }
 
@@ -146,7 +147,7 @@ class PersonalCodeFactory
      * @param $age int The age provided by Personal Code
      * @return bool - True if allowed, False if isn't
      */
-    protected function getIsAllowed($age){
+    public function getIsAllowed($age){
         return $age >= 18;
     }
 }
